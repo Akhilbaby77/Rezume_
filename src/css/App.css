@@ -1,0 +1,101 @@
+/* App.css */
+body {
+  margin: 0;
+  font-family: 'Arial', sans-serif;
+  background-color: rgb(10, 10, 11) !important; /* Ensure background color is applied */
+  color: #d84444;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Common styles for sections */
+.section {
+  padding: 50px 20px;
+  margin-bottom: 50px;
+  height: 100vh; /* Ensure sections take up full height for visibility */
+}
+
+/* Navbar styling */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #333;
+  color: #fff;
+  padding: 15px;
+  z-index: 1000;
+}
+
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar-logo {
+  font-size: 24px;
+  color: #fff;
+}
+
+.navbar-links a {
+  color: #fff;
+  margin: 0 15px;
+  font-size: 18px;
+  transition: color 0.3s;
+}
+
+.navbar-links a:hover {
+  color: #f4a261;
+}
+
+.navbar-upload {
+  display: flex;
+  align-items: center;
+}
+
+.upload-input {
+  display: none;
+}
+
+.upload-btn {
+  background-color: #f4a261;
+  padding: 10px 20px;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+  margin-left: 10px;
+}
+
+.upload-btn:hover {
+  background-color: #e09e42;
+}
+
+.uploaded-file {
+  text-align: center;
+  font-size: 18px;
+  margin-top: 20px;
+}
+
+/* Ensure the content starts below the navbar for ResumeAnalysis */
+.page-content {
+  padding-top: 120px; /* Increased padding for enough space */
+}
+
+.resume-analysis-container {
+  margin-top: 180px; /* Add margin or padding for ResumeAnalysis page if needed */
+}

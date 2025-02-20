@@ -1,0 +1,79 @@
+/* Features Section Styling */
+.features-section {
+    padding: 6rem 2rem;
+    background-color: #0f0f10;
+    text-align: center;
+  }
+  
+  .features-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: #1a1a1a;
+    font-weight: 700;
+  }
+  
+  .features-description {
+    margin-bottom: 3rem;
+    color: #555;
+    font-size: 1.2rem;
+    line-height: 1.6;
+  }
+  
+  .feature-cards {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+  
+  .card {
+    background: linear-gradient(135deg, #96cce3, #96cce3);
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    text-align: center;
+    width: 300px;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  
+  .card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.15);
+  }
+  
+  .icon-container {
+    font-size: 3rem;
+    color: #2575fc;
+    margin-bottom: 1rem;
+  }
+  
+  .card h3 {
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    color: #e26f6f;
+    font-weight: bold;
+  }
+  
+  .card p {
+    color: #666;
+    line-height: 1.5;
+    font-size: 1rem;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .feature-cards {
+      flex-direction: column;
+      gap: 1.5rem;
+      border: #c94e0d;
+    }
+  
+    .card {
+      width: 100%;
+      max-width: 90%;
+      margin: 0 auto;
+      border: #2575fc;
+    }
+  }
+  
