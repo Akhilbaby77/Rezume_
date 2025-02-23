@@ -10,7 +10,7 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
-import { Bar, Doughnut } from "react-chartjs-2";
+import { Bar, Pie } from "react-chartjs-2";
 import { Document, Page } from "react-pdf";
 import "../css/ResumeAnalysis.css";
 import { pdfjs } from "react-pdf";
@@ -18,16 +18,17 @@ import { pdfjs } from "react-pdf";
 // Set worker source
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
 
-
+// Register required Chart.js elements
 Chart.register(CategoryScale, LinearScale, BarElement, ArcElement, Title, Tooltip, Legend);
 
 const ResumeAnalysis = () => {
   const location = useLocation();
-  const { fileURL, fileName } = location.state || {}; // Use fileURL
+  const { fileURL } = location.state || {};
 
   const [score, setScore] = useState(0);
   const [numPages, setNumPages] = useState(null);
   const [pageNumber, setPageNumber] = useState(1);
+  const [animatedPieData, setAnimatedPieData] = useState(null);
   const overallScore = 85;
 
   const barChartData = {
@@ -36,36 +37,55 @@ const ResumeAnalysis = () => {
       {
         label: "Score",
         data: [80, 75, 90],
-        backgroundColor: ["#F3E1AE", "#E4A833", "#DCBCB1"],
+        backgroundColor: ["#1B4F72", "#117864", "#2C3E50"], // Darker blues & teal
       },
     ],
   };
 
-  const doughnutChartData = {
+  const pieChartData = {
     labels: ["Education", "Certifications", "Projects"],
     datasets: [
       {
         label: "Score",
         data: [85, 70, 95],
-        backgroundColor: ["#F3E1AE", "#E4A833", "#DCBCB1"],
-        hoverBackgroundColor: ["#F7D36F", "#F2C14E", "#E7A49B"],
+        backgroundColor: ["#283747", "#6C3483", "#1C2833"], // Darker navy, deep purple, dark gray
+        hoverBackgroundColor: ["#1A5276", "#5B2C6F", "#17202A"], // Slightly darker on hover
+        hoverOffset: 10,
       },
     ],
+  };
+
+  // Updated Bar Chart Options
+  const barChartOptions = {
+    responsive: true,
+    maintainAspectRatio: false,
+    aspectRatio: 1.5,
+    scales: {
+      y: { display: false },
+      x: {
+        grid: { display: false },
+      },
+    },
+    animation: {
+      animateRotate: true,
+      animateScale: true,
+      duration: 1800,
+      easing: "easeInOutCubic",
+    },
   };
 
   const chartOptions = {
     responsive: true,
     maintainAspectRatio: false,
     animation: {
-      duration: 1500,
-      easing: "easeOutQuad",
-    },
-    scales: {
-      x: { beginAtZero: true },
-      y: { beginAtZero: true },
+      animateRotate: true,
+      animateScale: true,
+      duration: 1800,
+      easing: "easeInOutCubic",
     },
   };
 
+  // Score Animation Effect
   useEffect(() => {
     const interval = setInterval(() => {
       if (score < overallScore) {
@@ -75,10 +95,17 @@ const ResumeAnalysis = () => {
     return () => clearInterval(interval);
   }, [score, overallScore]);
 
+  // Animate Pie Chart on Mount
+  useEffect(() => {
+    setTimeout(() => {
+      setAnimatedPieData(pieChartData);
+    }, 300);
+  }, []);
+
   const getScoreBarColor = (score) => {
-    if (score >= 80) return "#4CAF50";
-    if (score >= 50) return "#FFEB3B";
-    return "#F44336";
+    if (score >= 80) return "#2ECC71";
+    if (score >= 50) return "#F1C40F";
+    return "#E74C3C";
   };
 
   const onDocumentLoadSuccess = ({ numPages }) => {
@@ -94,7 +121,9 @@ const ResumeAnalysis = () => {
             <Document file={fileURL} onLoadSuccess={onDocumentLoadSuccess}>
               <Page pageNumber={pageNumber} />
             </Document>
-            <p>Page {pageNumber} of {numPages}</p>
+            <p>
+              Page {pageNumber} of {numPages}
+            </p>
           </div>
         ) : (
           <p>Please upload a resume file first.</p>
@@ -108,7 +137,10 @@ const ResumeAnalysis = () => {
           <h3>Overall Score</h3>
           <div className="score-container">
             <div className="score-bar">
-              <div className="score-fill" style={{ width: `${score}%`, backgroundColor: getScoreBarColor(score) }} />
+              <div
+                className="score-fill"
+                style={{ width: `${score}%`, backgroundColor: getScoreBarColor(score) }}
+              />
             </div>
             <p className="score-text">{score}/100</p>
           </div>
@@ -117,11 +149,11 @@ const ResumeAnalysis = () => {
         <div className="charts-container">
           <div className="chart">
             <h3>Skill & Experience Breakdown</h3>
-            <Bar data={barChartData} options={chartOptions} />
+            <Bar data={barChartData} options={barChartOptions} />
           </div>
           <div className="chart">
             <h3>Education & Certifications</h3>
-            <Doughnut data={doughnutChartData} options={chartOptions} />
+            {animatedPieData && <Pie data={animatedPieData} options={chartOptions} />}
           </div>
         </div>
       </div>

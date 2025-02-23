@@ -1,7 +1,7 @@
 /* Features Section Styling */
 .features-section {
     padding: 6rem 2rem;
-    background-color: #0f0f10;
+    /* background-color: #0f0f10; */
     text-align: center;
   }
   
@@ -14,7 +14,7 @@
   
   .features-description {
     margin-bottom: 3rem;
-    color: #555;
+    color: #0c0c0c;
     font-size: 1.2rem;
     line-height: 1.6;
   }
@@ -27,7 +27,7 @@
   }
   
   .card {
-    background: linear-gradient(135deg, #96cce3, #96cce3);
+    background: linear-gradient(135deg, #356d88, #073139);
     border: none;
     border-radius: 12px;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);

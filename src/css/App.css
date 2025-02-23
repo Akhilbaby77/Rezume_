@@ -1,11 +1,29 @@
 /* App.css */
+
+/* Define keyframes for gradient animation */
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Apply the animated gradient to the body */
 body {
   margin: 0;
   font-family: 'Arial', sans-serif;
-  background-color: rgb(10, 10, 11) !important; /* Ensure background color is applied */
+  background: linear-gradient(270deg, #464646, #7d97b1, #b9caf5d3);
+  background-size: 600% 600%;
   color: #d84444;
+  animation: gradientAnimation 15s ease infinite;
 }
 
+/* Additional styles for your application */
 a {
   text-decoration: none;
   color: inherit;
@@ -93,7 +111,7 @@ html {
 
 /* Ensure the content starts below the navbar for ResumeAnalysis */
 .page-content {
-  padding-top: 120px; /* Increased padding for enough space */
+  padding-top: 80px; /* Increased padding for enough space */
 }
 
 .resume-analysis-container {
